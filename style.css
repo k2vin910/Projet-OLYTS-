@@ -1,0 +1,86 @@
+/* style.css */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #0d0f18; /* very dark navy/indigo */
+  color: #eee; /* light grey text */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.box {
+  background: #1a1f2e; /* dark slightly lighter block */
+  padding: 30px;
+  border-radius: 16px;
+  width: 420px;
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.6),
+    0 0 20px rgba(128, 0, 255, 0.4); /* neon glow */
+  border: 1px solid #2c3154; /* subtle dark border with color hint */
+}
+
+h2 {
+  margin-top: 0;
+  color: #cfa3ff; /* light purple */
+  text-align: center;
+}
+
+textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #444;
+  background: #121528;
+  color: #eee;
+  resize: none;
+  transition: border-color 0.3s;
+}
+
+textarea:focus {
+  border-color: #a772ff;
+  outline: none;
+  box-shadow: 0 0 8px rgba(167,114,255,0.5);
+}
+
+button {
+  margin-top: 15px;
+  padding: 12px;
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(45deg, #6e00ff, #ff00f0);
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-position 0.5s, box-shadow 0.3s;
+  background-size: 200% 200%;
+}
+
+button:hover {
+  background-position: right center;
+  box-shadow: 0 0 12px rgba(255, 0, 240, 0.7), 0 0 8px rgba(110, 0, 255, 0.7);
+}
+
+.message {
+  margin-top: 20px;
+  padding: 15px;
+  background: #23273f;
+  border-radius: 8px;
+  border-left: 4px solid #ce94ff;
+  color: #ddd;
+  word-break: break-word;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+
+a {
+  color: #9a63ff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
