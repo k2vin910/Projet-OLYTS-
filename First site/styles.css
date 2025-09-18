@@ -1,0 +1,206 @@
+/* === STYLE GLOBAL === */
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  background: #f4f6fa;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* === HEADER === */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 51, 102, 0.85);
+  color: white;
+  padding: 14px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  z-index: 1000;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+}
+
+nav a {
+  color: white;
+  margin: 0 15px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #ff6600;
+}
+
+/* === HERO === */
+.hero {
+  background: linear-gradient(rgba(0, 51, 102, 0.55), rgba(0, 51, 102, 0.55)),
+              url('famille.webp') no-repeat center center;
+  background-size: cover;
+  color: white;
+  padding: 120px 20px 80px;
+  text-align: center;
+}
+
+.hero h2 {
+  font-size: 2.8em;
+  margin-bottom: 15px;
+  text-shadow: 0 3px 6px rgba(0,0,0,0.4);
+}
+
+.hero p {
+  font-size: 1.3em;
+  margin-bottom: 25px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btn {
+  background: #ff6600;
+  color: white;
+  padding: 14px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+  background: #cc5200;
+  transform: translateY(-2px);
+}
+
+/* === BOUTIQUE === */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  padding: 40px;
+}
+
+.product-card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.product-card img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.product-card h3 {
+  margin: 12px 0;
+  color: #003366;
+  font-size: 1.2rem;
+}
+
+.price {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #ff6600;
+}
+
+.product-card button {
+  background: #ff6600;
+  color: white;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 12px;
+  transition: background 0.3s ease;
+}
+
+.product-card button:hover {
+  background: #cc5200;
+}
+
+/* === CONTACT === */
+.contact-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 20px;
+}
+
+.contact-form {
+  background: white;
+  padding: 30px 35px;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.contact-form label {
+  text-align: left;
+  font-weight: bold;
+  color: #003366;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1em;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: #ff6600;
+  box-shadow: 0 0 8px rgba(255, 102, 0, 0.4);
+  outline: none;
+}
+
+.contact-form button {
+  background: #ff6600;
+  color: white;
+  padding: 14px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.contact-form button:hover {
+  background: #cc5200;
+  transform: scale(1.03);
+}
+
+/* === FOOTER === */
+footer {
+  text-align: center;
+  padding: 15px;
+  font-size: 0.9em;
+  color: #eee;
+  background: #003366;
+  margin-top: 40px;
+}
