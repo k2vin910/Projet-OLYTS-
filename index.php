@@ -1,51 +1,92 @@
 <?php
 session_start();
 
-// Connect to MySQL (adjust if your user/pass/db are different)
+// Connect to MySQL
 $bdd = new PDO("mysql:host=localhost;dbname=olyts;charset=utf8", "root", "");
 $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($_POST["username"])) {
-    $username = trim($_POST["username"]);
+$error = null;
 
-    // find or create user
-    $stmt = $bdd->prepare("SELECT id FROM identite WHERE username = :u");
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $username = trim($_POST["username"] ?? "");
+    $nfc_id  = trim($_POST["nfc_id"] ?? "");
+    $password = $_POST["password"] ?? "";
+
+    // Fetch user by username
+    $stmt = $bdd->prepare("SELECT id, username, nfc_id, is_admin, password FROM identite WHERE username = :u");
     $stmt->execute([":u" => $username]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$user) {
-        $stmt = $bdd->prepare("INSERT INTO identite (username) VALUES (:u)");
-        $stmt->execute([":u" => $username]);
-        $identite_id = $bdd->lastInsertId();  
+        $error = "❌ Username not recognized.";
     } else {
-        $identite_id = $user["id"];
+        if ($user["is_admin"]) {
+            // Admin login with password
+            if (!$password || !password_verify($password, $user["password"])) {
+                $error = "❌ Incorrect admin password.";
+            } else {
+                $_SESSION["identite"] = $user["id"];
+                $_SESSION["username"] = $user["username"];
+                header("Location: bind.php");
+                exit;
+            }
+        } else {
+            // Regular user login via NFC
+            if (!$nfc_id || $nfc_id !== $user["nfc_id"]) {
+                $error = "❌ NFC tag invalid or missing.";
+            } else {
+                $_SESSION["identite"] = $user["id"];
+                $_SESSION["username"] = $user["username"];
+                $_SESSION["nfc_id"] = $user["nfc_id"];
+                header("Location: inbox.php");
+                exit;
+            }
+        }
     }
-
-    // store in session
-    $_SESSION["identite"] = $identite_id;
-    $_SESSION["username"] = $username;
-
-    // redirect to inbox
-    header("Location: inbox.php");
-    exit;
 }
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Secret Messages - Login</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Secret Messages - Login</title>
+<link rel="stylesheet" href="style.css">
+<script>
+async function scanNFC() {
+    if (!("NDEFReader" in window)) {
+        alert("⚠️ NFC not supported on this device/browser.");
+        return;
+    }
+    try {
+        const ndef = new NDEFReader();
+        await ndef.scan();
+        document.getElementById("status").textContent = "📡 Scanning for NFC tag...";
+        ndef.onreading = event => {
+            const uid = event.serialNumber;
+            document.getElementById("nfc_id").value = uid;
+            document.getElementById("status").textContent = "✅ Tag detected: " + uid;
+        };
+    } catch(err) {
+        alert("❌ NFC scan failed: " + err);
+    }
+}
+</script>
 </head>
 <body>
-  <div class="box">
+<div class="box">
     <h2>🔐 Secret Messages</h2>
-    <form method="POST" action="index.php">
 
-      <input type="text" name="username" placeholder="Enter username" required style="width:100%;padding:12px;border-radius:8px;margin-bottom:12px;border:1px solid #444;background:#121528;color:#eee;">
-      <button type="submit">Login</button>
+    <?php if($error) echo "<p class='message error'>$error</p>"; ?>
+
+    <form method="POST" class="form">
+        <input type="text" name="username" placeholder="Username" required class="input">
+        <input type="password" name="password" placeholder="Admin Password (for admins only)" class="input">
+        <input type="hidden" name="nfc_id" id="nfc_id">
+        <p id="status" class="status">Admins use password. Regular users scan NFC.</p>
+
+        <button type="button" class="btn" onclick="scanNFC()">Scan NFC (Users)</button>
+        <button type="submit" class="btn">Login</button>
     </form>
-  </div>
+</div>
 </body>
 </html>
