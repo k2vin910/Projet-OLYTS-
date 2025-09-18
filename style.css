@@ -1,11 +1,10 @@
-/* style.css */
-
+/* --- old styles (kept exactly as you had them) --- */
 body {
   margin: 0;
   padding: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #0d0f18; /* very dark navy/indigo */
-  color: #eee; /* light grey text */
+  background: #0d0f18;
+  color: #eee;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,19 +12,18 @@ body {
 }
 
 .box {
-  background: #1a1f2e; /* dark slightly lighter block */
+  background: #1a1f2e;
   padding: 30px;
   border-radius: 16px;
   width: 420px;
-  box-shadow: 
-    0 4px 12px rgba(0, 0, 0, 0.6),
-    0 0 20px rgba(128, 0, 255, 0.4); /* neon glow */
-  border: 1px solid #2c3154; /* subtle dark border with color hint */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6),
+              0 0 20px rgba(128, 0, 255, 0.4);
+  border: 1px solid #2c3154;
 }
 
 h2 {
   margin-top: 0;
-  color: #cfa3ff; /* light purple */
+  color: #cfa3ff;
   text-align: center;
 }
 
@@ -62,7 +60,8 @@ button {
 
 button:hover {
   background-position: right center;
-  box-shadow: 0 0 12px rgba(255, 0, 240, 0.7), 0 0 8px rgba(110, 0, 255, 0.7);
+  box-shadow: 0 0 12px rgba(255, 0, 240, 0.7),
+              0 0 8px rgba(110, 0, 255, 0.7);
 }
 
 .message {
@@ -83,4 +82,89 @@ a {
 
 a:hover {
   text-decoration: underline;
+}
+
+/* --- new improvements --- */
+.input, select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #444;
+  background: #121528;
+  color: #eee;
+  margin-bottom: 12px;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0 20px;
+}
+
+.btn {
+  display: inline-block;
+  background: linear-gradient(45deg, #6e00ff, #ff00f0);
+  padding: 8px 16px;
+  border-radius: 8px;
+  color: white;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background-position: right center;
+  box-shadow: 0 0 8px rgba(255, 0, 240, 0.7),
+              0 0 6px rgba(110, 0, 255, 0.7);
+}
+
+.btn.small {
+  padding: 6px 12px;
+  font-size: 14px;
+}
+
+.btn.danger {
+  background: linear-gradient(45deg, #ff0044, #ff7700);
+}
+
+.status {
+  text-align: center;
+  margin-bottom: 15px;
+  color: #aaa;
+  font-size: 14px;
+}
+
+.message.success {
+  border-left-color: #4eff7a;
+  background: #1c2f24;
+}
+
+.message.error {
+  border-left-color: #ff4e6e;
+  background: #2f1c24;
+}
+
+.message-card {
+  margin-top: 20px;
+  padding: 15px;
+  background: #23273f;
+  border-radius: 8px;
+  border-left: 4px solid #9a63ff;
+}
+
+.reply-form textarea {
+  margin-top: 10px;
+}
+
+.empty {
+  text-align: center;
+  color: #777;
+  margin-top: 20px;
+}
+
+/* mobile tweaks */
+@media (max-width: 480px) {
+  .box {
+    width: 90%;
+    padding: 20px;
+  }
 }
